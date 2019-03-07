@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">#276c83</color>
+    <color name="colorPrimaryDark">#00574B</color>
+    <color name="colorAccent">#D81B60</color>
+    <color name="colorBackground">#efeff4</color>
+    <color name="colorScreenBg">#FFFFFF</color>
+    <color name="colorTabIndicator">#007aff</color>
+    <color name="colorTabText">#828282</color>
+    <color name="colorTaskNumbers">#828282</color>
+    <color name="colorRatingRibbonBlue">#BF276c83</color>
+    <color name="colorRatingRibbonRed">#BFf44336</color>
+    <color name="colorRatingRibbonGreen">#BF4cd964</color>
+    <color name="colorHelpDescriptionText">#757575</color>
+</resources>

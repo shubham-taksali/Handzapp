@@ -1,0 +1,20 @@
+<resources>
+    <string name="app_name">Handzapp</string>
+    <string name="action_help">Help</string>
+    <string name="tab_one">FOLLOWERS</string>
+    <string name="tab_two">FAVOURITES</string>
+    <string name="tab_three">BLOCKED</string>
+    <string name="tab_description_text">Long Press to select and %1$s.</string>
+    <string name="string_remove">remove</string>
+    <string name="string_unblock">unblock</string>
+    <string name="string_unfavourite">unfavourite</string>
+    <string name="invalid_selection">Invalid Selection!!</string>
+    <string name="im_content_description_person_image">Person\'s Image</string>
+    <string name="im_content_description_star">Star Rating Image</string>
+    <string name="im_content_description_trophy">Trophy Image</string>
+    <string name="string_task_numbers">%1$d Tasks</string>
+    <string name="string_connections">Connections</string>
+    <string name="string_followers_description">Followers are those users who have accepted your invitation to Handzap and that you may receive rewards every time they use Handzap. Followers have no access to your account and can’t see or follow your profile info, Job Posts or Job Searches.</string>
+    <string name="string_favourites_description">Favorites are those users that you liked in the past and that you can always invite to your job posts. Favorites have no access to your account and can’t see or follow your profile info, Job Posts or Job Searches unless you invite any of them to an existing Job Post.</string>
+    <string name="string_blocked_description">Blocked are those users that can’t send you messages or calls. Blocked users have no access to your account as well and can’t see or follow your profile info, Job Posts or Job Searches.</string>
+</resources>
