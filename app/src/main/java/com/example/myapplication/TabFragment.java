@@ -3,21 +3,39 @@ package com.example.myapplication;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.support.design.widget.CoordinatorLayout;
+import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
+import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Toast;
 
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
+
+import java.io.IOException;
+import java.io.InputStream;
+import java.lang.reflect.Type;
+import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
+import java.util.Collection;
+import java.util.List;
 
 public class TabFragment extends Fragment implements RecyclerViewAdapter.ItemListener {
 
-    int position;
-    RecyclerView recyclerView;
-    ArrayList arrayList;
+    private int position;
+    private RecyclerView recyclerView;
+    private RecyclerViewAdapter recyclerViewAdapter;
+    private ArrayList<DataModel> arrayListFollowers;
+    private ArrayList<DataModel> arrayListFavorites;
+    private ArrayList<DataModel> arrayListBlocked;
+    private Gson gson;
+    private Type collectionType;
+    private CoordinatorLayout coordinatorLayout;
 
     public static Fragment getInstance(int position) {
         Bundle bundle = new Bundle();
@@ -30,7 +48,14 @@ public class TabFragment extends Fragment implements RecyclerViewAdapter.ItemLis
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        setHasOptionsMenu(true);
         position = getArguments().getInt("pos");
+        collectionType = new TypeToken<Collection<DataModel>>() {
+        }.getType();
+        gson = new Gson();
+        arrayListFollowers = gson.fromJson(loadJSONFromAsset(), collectionType);
+        arrayListFavorites = gson.fromJson(loadJSONFromAsset(), collectionType);
+        arrayListBlocked = gson.fromJson(loadJSONFromAsset(), collectionType);
     }
 
     @Override
@@ -43,81 +68,120 @@ public class TabFragment extends Fragment implements RecyclerViewAdapter.ItemLis
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        recyclerView = view.findViewById(R.id.recyclerView);
+        int ribbonColor = 0;
 
-        if(position == 0) {
-            arrayList = new ArrayList();
-            arrayList.add(new DataModel(R.drawable.image_001,
-                    "Douglas Roof",
-                    "3.8",
-                    getActivity().getResources().getString(
-                            R.string.string_task_numbers, 298),
-                    getActivity().getResources().getColor(R.color.colorRatingRibbonBlue)));
-            arrayList.add(new DataModel(R.drawable.image_002,
-                    "Douglas Roof",
-                    "3.8",
-                    getActivity().getResources().getString(
-                            R.string.string_task_numbers, 298),
-                    getActivity().getResources().getColor(R.color.colorRatingRibbonBlue)));
-            arrayList.add(new DataModel(R.drawable.image_003,
-                    "Douglas Roof",
-                    "3.8",
-                    getActivity().getResources().getString(
-                            R.string.string_task_numbers, 298),
-                    getActivity().getResources().getColor(R.color.colorRatingRibbonBlue)));
-        } else if (position == 1){
-            arrayList = new ArrayList();
-            arrayList.add(new DataModel(R.drawable.image_001,
-                    "Douglas Roof",
-                    "3.8",
-                    getActivity().getResources().getString(
-                            R.string.string_task_numbers, 298),
-                    getActivity().getResources().getColor(R.color.colorRatingRibbonGreen)));
-            arrayList.add(new DataModel(R.drawable.image_002,
-                    "Douglas Roof",
-                    "3.8",
-                    getActivity().getResources().getString(
-                            R.string.string_task_numbers, 298),
-                    getActivity().getResources().getColor(R.color.colorRatingRibbonGreen)));
-            arrayList.add(new DataModel(R.drawable.image_003,
-                    "Douglas Roof",
-                    "3.8",
-                    getActivity().getResources().getString(
-                            R.string.string_task_numbers, 298),
-                    getActivity().getResources().getColor(R.color.colorRatingRibbonGreen)));
-        } else if (position == 2){
-            arrayList = new ArrayList();
-            arrayList.add(new DataModel(R.drawable.image_001,
-                    "Douglas Roof",
-                    "3.8",
-                    getActivity().getResources().getString(
-                            R.string.string_task_numbers, 298),
-                    getActivity().getResources().getColor(R.color.colorRatingRibbonRed)));
-            arrayList.add(new DataModel(R.drawable.image_002,
-                    "Douglas Roof",
-                    "3.8",
-                    getActivity().getResources().getString(
-                            R.string.string_task_numbers, 298),
-                    getActivity().getResources().getColor(R.color.colorRatingRibbonRed)));
-            arrayList.add(new DataModel(R.drawable.image_003,
-                    "Douglas Roof",
-                    "3.8",
-                    getActivity().getResources().getString(
-                            R.string.string_task_numbers, 298),
-                    getActivity().getResources().getColor(R.color.colorRatingRibbonRed)));
+        recyclerView = view.findViewById(R.id.recyclerView);
+        coordinatorLayout = view.findViewById(R.id.crl_parent_layout);
+
+        if (position == 0) {
+            ribbonColor = getResources().getColor(R.color.colorRatingRibbonBlue);
+            recyclerViewAdapter = new RecyclerViewAdapter(getActivity(),
+                    arrayListFollowers, ribbonColor, this);
+        } else if (position == 1) {
+            ribbonColor = getResources().getColor(R.color.colorRatingRibbonGreen);
+            recyclerViewAdapter = new RecyclerViewAdapter(getActivity(),
+                    arrayListFavorites, ribbonColor, this);
+        } else if (position == 2) {
+            ribbonColor = getResources().getColor(R.color.colorRatingRibbonRed);
+            recyclerViewAdapter = new RecyclerViewAdapter(getActivity(),
+                    arrayListBlocked, ribbonColor, this);
         }
 
-        RecyclerViewAdapter adapter = new RecyclerViewAdapter(getActivity(),
-                arrayList, this);
-        recyclerView.setAdapter(adapter);
+        recyclerView.setAdapter(recyclerViewAdapter);
         GridLayoutManager manager = new GridLayoutManager(getActivity(),
                 3, GridLayoutManager.VERTICAL, false);
         recyclerView.setLayoutManager(manager);
-
+        recyclerView.setItemAnimator(new DefaultItemAnimator());
     }
 
     @Override
-    public void onItemClick(DataModel item) {
-        //Toast.makeText(getActivity(), item.getPersonName() + " is clicked", Toast.LENGTH_SHORT).show();
+    public void onItemClick(int position) {
+        if (MyApplication.isInMultiSelectMode())
+            enableActionMode(position);
+        else {
+            // Can be used for implement normal Click functionality
+        }
+    }
+
+    @Override
+    public void onItemLongClick(int position) {
+        enableActionMode(position);
+    }
+
+    private void enableActionMode(int position) {
+        recyclerViewAdapter.toggleSelection(position);
+        MyApplication.setSelectedItemCount(recyclerViewAdapter.getSelectedItemCount());
+        getActivity().invalidateOptionsMenu();
+        if (MyApplication.isInMultiSelectMode() && MyApplication.getSelectedItemCount() > 0)
+            ((MainActivity) getActivity()).getSupportActionBar().setTitle(getString(
+                    R.string.string_selected_items, MyApplication.getSelectedItemCount()));
+
+    }
+
+    private void deleteItem() {
+        List<Integer> selectedItemPositions =
+                recyclerViewAdapter.getSelectedItems();
+        for (int i = selectedItemPositions.size() - 1; i >= 0; i--) {
+            recyclerViewAdapter.removeData(selectedItemPositions.get(i));
+        }
+        recyclerViewAdapter.notifyDataSetChanged();
+        showSnackbar();
+        returnToNormalMode();
+    }
+
+    public String loadJSONFromAsset() {
+        String json = null;
+        try {
+            InputStream inputStream = getActivity().getAssets().open("data.json");
+            int size = inputStream.available();
+            byte[] bytes = new byte[size];
+            inputStream.read(bytes);
+            inputStream.close();
+            json = new String(bytes, StandardCharsets.UTF_8);
+        } catch (IOException e) {
+            e.printStackTrace();
+            return null;
+        }
+        return json;
+    }
+
+    private void returnToNormalMode() {
+        recyclerViewAdapter.clearSelections();
+        ((MainActivity) getActivity()).getSupportActionBar().setTitle(R.string.app_name);
+        getActivity().invalidateOptionsMenu();
+    }
+
+    private void showSnackbar() {
+        Snackbar snackbar = null;
+        if (position == 0)
+            snackbar = Snackbar.make(coordinatorLayout,
+                    getString(R.string.sb_removed, MyApplication.getSelectedItemCount()),
+                    Snackbar.LENGTH_LONG);
+        if (position == 1)
+            snackbar = Snackbar.make(coordinatorLayout,
+                    getString(R.string.sb_unfavorited, MyApplication.getSelectedItemCount()),
+                    Snackbar.LENGTH_LONG);
+        if (position == 2)
+            snackbar = Snackbar.make(coordinatorLayout,
+                    getString(R.string.sb_unblocked, MyApplication.getSelectedItemCount()),
+                    Snackbar.LENGTH_LONG);
+        snackbar.show();
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case R.id.action_help:
+                return false;
+            case R.id.action_remove:
+                deleteItem();
+                return true;
+            case android.R.id.home:
+                returnToNormalMode();
+                return true;
+            default:
+                break;
+        }
+        return false;
     }
 }

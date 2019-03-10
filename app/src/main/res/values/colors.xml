@@ -12,4 +12,6 @@
     <color name="colorRatingRibbonRed">#BFf44336</color>
     <color name="colorRatingRibbonGreen">#BF4cd964</color>
     <color name="colorHelpDescriptionText">#757575</color>
+    <color name="colorCardSelectedBorder">#007aff</color>
+    <color name="colorCardSelectedForeground">#19007AFF</color>
 </resources>

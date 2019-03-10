@@ -1,59 +1,97 @@
 package com.example.myapplication;
 
+import com.google.gson.annotations.Expose;
+import com.google.gson.annotations.SerializedName;
+
 public class DataModel {
 
-    private int drawable;
-    private String personName;
-    private String personRating;
-    private String personTask;
-    private int ribbonColor;
+    @SerializedName("number")
+    @Expose
+    private Integer number;
+    @SerializedName("name")
+    @Expose
+    private String name;
+    @SerializedName("rating")
+    @Expose
+    private String rating;
+    @SerializedName("tasks")
+    @Expose
+    private String tasks;
+    @SerializedName("image")
+    @Expose
+    private String image;
 
+    private boolean isSelected;
 
-    public DataModel(int drawable, String personName, String personRating, String personTask, int ribbonColor) {
-        this.drawable = drawable;
-        this.personName = personName;
-        this.personRating = personRating;
-        this.personTask = personTask;
-        this.ribbonColor = ribbonColor;
+    /**
+     * No args constructor for use in serialization
+     */
+    public DataModel() {
     }
 
-    public int getDrawable() {
-        return drawable;
+    /**
+     * @param name
+     * @param image
+     * @param number
+     * @param tasks
+     * @param rating
+     */
+    public DataModel(Integer number, String name, String rating, String tasks, String image) {
+        super();
+        this.number = number;
+        this.name = name;
+        this.rating = rating;
+        this.tasks = tasks;
+        this.image = image;
+        this.isSelected = false;
     }
 
-    public void setDrawable(int drawable) {
-        this.drawable = drawable;
+    public Integer getNumber() {
+        return number;
     }
 
-    public String getPersonName() {
-        return personName;
+    public void setNumber(Integer number) {
+        this.number = number;
     }
 
-    public void setPersonName(String personName) {
-        this.personName = personName;
+    public String getName() {
+        return name;
     }
 
-    public String getPersonRating() {
-        return personRating;
+    public void setName(String name) {
+        this.name = name;
     }
 
-    public void setPersonRating(String personRating) {
-        this.personRating = personRating;
+    public String getRating() {
+        return rating;
     }
 
-    public String getPersonTask() {
-        return personTask;
+    public void setRating(String rating) {
+        this.rating = rating;
     }
 
-    public void setPersonTask(String personTask) {
-        this.personTask = personTask;
+    public String getTasks() {
+        return tasks;
     }
 
-    public int getRibbonColor() {
-        return ribbonColor;
+    public void setTasks(String tasks) {
+        this.tasks = tasks;
     }
 
-    public void setRibbonColor(int ribbonColor) {
-        this.ribbonColor = ribbonColor;
+    public String getImage() {
+        return image;
     }
+
+    public void setImage(String image) {
+        this.image = image;
+    }
+
+    public boolean isSelected() {
+        return isSelected;
+    }
+
+    public void setSelected(boolean isSelected) {
+        this.isSelected = isSelected;
+    }
+
 }

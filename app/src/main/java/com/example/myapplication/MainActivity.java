@@ -51,9 +51,11 @@ public class MainActivity extends AppCompatActivity {
                 } else if (position == 2) {
                     tabDescriptionText.setText(getString(
                             R.string.tab_description_text, getString(R.string.string_unblock)));
-                } else
+                } else {
                     tabDescriptionText.setText(getString(
                             R.string.invalid_selection));
+                }
+                invalidateOptionsMenu();
             }
 
             @Override
@@ -70,8 +72,33 @@ public class MainActivity extends AppCompatActivity {
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-
         getMenuInflater().inflate(R.menu.menu_main, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onPrepareOptionsMenu(Menu menu) {
+
+        MenuItem actionButton = menu.findItem(R.id.action_remove);
+        MenuItem actionHelp = menu.findItem(R.id.action_help);
+        if (MyApplication.isInMultiSelectMode()) {
+            actionHelp.setVisible(false);
+            actionButton.setVisible(true);
+            if (position == 0)
+                actionButton.setTitle(R.string.action_remove);
+            else if (position == 1)
+                actionButton.setTitle(R.string.action_unfavorite);
+            else if (position == 2)
+                actionButton.setTitle(R.string.action_unblock);
+        } else {
+            actionHelp.setVisible(true);
+            actionButton.setVisible(false);
+        }
+
+        if (MyApplication.isInMultiSelectMode() && MyApplication.getSelectedItemCount() == 0) {
+            getSupportActionBar().setTitle(R.string.app_name);
+            actionButton.setEnabled(false);
+        }
         return true;
     }
 
@@ -84,6 +111,9 @@ public class MainActivity extends AppCompatActivity {
             Intent intent = new Intent(MainActivity.this, SafetyTipsActivity.class);
             startActivity(intent);
             return true;
+        }
+        if (id == R.id.action_remove) {
+            return false;
         }
 
         return super.onOptionsItemSelected(item);

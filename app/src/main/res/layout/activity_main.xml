@@ -32,48 +32,54 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="124dp"
+        android:layout_height="match_parent"
         android:layout_marginTop="80dp"
-        android:background="@color/colorScreenBg"
-        android:orientation="vertical"
-        android:paddingTop="10dp">
+        android:orientation="vertical">
 
-        <android.support.design.widget.TabLayout
-            android:id="@+id/tabs"
-            style="@style/TabStyle"
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="@color/colorScreenBg"
-            app:tabGravity="fill"
-            app:tabIndicatorColor="@color/colorTabIndicator"
-            app:tabMode="fixed" />
+            android:layout_height="0dp"
+            android:layout_weight=".2"
+            android:orientation="vertical">
 
-        <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="@color/colorScreenBg">
+            <android.support.design.widget.TabLayout
+                android:id="@+id/tabs"
+                style="@style/TabStyle"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/colorScreenBg"
+                app:tabGravity="fill"
+                app:tabIndicatorColor="@color/colorTabIndicator"
+                app:tabMode="fixed" />
 
-            <TextView
-                android:id="@+id/tab_textview"
+            <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:layout_marginStart="16dp"
-                android:layout_marginTop="20dp"
-                android:layout_marginEnd="16dp" />
-        </RelativeLayout>
-    </LinearLayout>
+                android:layout_marginTop="1dp"
+                android:background="@color/colorScreenBg">
 
-    <FrameLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_marginTop="207dp"
-        android:background="@color/colorScreenBg">
+                <TextView
+                    android:id="@+id/tab_textview"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_marginStart="16dp" />
+            </RelativeLayout>
+        </LinearLayout>
 
-        <android.support.v4.view.ViewPager
-            android:id="@+id/viewpager"
+        <FrameLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            app:layout_behavior="@string/appbar_scrolling_view_behavior" />
-    </FrameLayout>
+            android:layout_height="0dp"
+            android:layout_marginTop="1.5dp"
+            android:layout_weight=".8"
+            android:background="@color/colorScreenBg">
+
+            <android.support.v4.view.ViewPager
+                android:id="@+id/viewpager"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                app:layout_behavior="@string/appbar_scrolling_view_behavior" />
+        </FrameLayout>
+    </LinearLayout>
 
 </android.support.design.widget.CoordinatorLayout>

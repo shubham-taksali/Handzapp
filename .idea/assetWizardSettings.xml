@@ -19,8 +19,8 @@
                         <option name="values">
                           <map>
                             <entry key="assetSourceType" value="FILE" />
-                            <entry key="outputName" value="ic_tasks_completed_icon" />
-                            <entry key="sourceFile" value="C:\Users\Shubham\Downloads\Connection_images\images\icons\Tasks Completed icon.svg" />
+                            <entry key="outputName" value="ic_check_blue_enable" />
+                            <entry key="sourceFile" value="C:\Users\Shubham\Downloads\check_blue_enable.svg" />
                           </map>
                         </option>
                       </PersistentState>
