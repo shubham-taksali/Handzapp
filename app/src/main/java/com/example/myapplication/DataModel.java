@@ -21,8 +21,6 @@ public class DataModel {
     @Expose
     private String image;
 
-    private boolean isSelected;
-
     /**
      * No args constructor for use in serialization
      */
@@ -43,7 +41,6 @@ public class DataModel {
         this.rating = rating;
         this.tasks = tasks;
         this.image = image;
-        this.isSelected = false;
     }
 
     public Integer getNumber() {
@@ -85,13 +82,4 @@ public class DataModel {
     public void setImage(String image) {
         this.image = image;
     }
-
-    public boolean isSelected() {
-        return isSelected;
-    }
-
-    public void setSelected(boolean isSelected) {
-        this.isSelected = isSelected;
-    }
-
 }

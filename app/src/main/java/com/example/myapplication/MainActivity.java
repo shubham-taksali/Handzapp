@@ -17,6 +17,7 @@ public class MainActivity extends AppCompatActivity {
     private Toolbar toolbar;
     private TabLayout tabLayout;
     private ViewPager viewPager;
+    private TabFragment tabFragment;
     private TextView tabDescriptionText;
     private int position;
 
@@ -62,7 +63,9 @@ public class MainActivity extends AppCompatActivity {
 
             @Override
             public void onTabUnselected(TabLayout.Tab tab) {
-
+                tabFragment = (TabFragment) viewPager.getAdapter().
+                        instantiateItem(viewPager, viewPager.getCurrentItem());
+                tabFragment.returnToNormalMode();
             }
 
             @Override
@@ -116,6 +119,9 @@ public class MainActivity extends AppCompatActivity {
         }
         if (id == R.id.action_remove) {
             return false;
+        }
+        if (id == android.R.id.home) {
+            //Can be used to go to previous screen or to close the current activity
         }
 
         return super.onOptionsItemSelected(item);

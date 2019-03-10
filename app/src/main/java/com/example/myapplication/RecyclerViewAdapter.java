@@ -99,6 +99,7 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
     public void clearSelections() {
         selectedItems.clear();
         MyApplication.setIsInMultiSelectMode(false);
+        MyApplication.setSelectedItemCount(0);
         notifyDataSetChanged();
     }
 

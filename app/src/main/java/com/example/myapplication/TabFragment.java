@@ -98,7 +98,7 @@ public class TabFragment extends Fragment implements RecyclerViewAdapter.ItemLis
     @Override
     public void onItemClick(int position) {
         if (MyApplication.isInMultiSelectMode())
-            enableActionMode(position);
+            enableMultiSelectMode(position);
         else {
             // Can be used for implement normal Click functionality
         }
@@ -106,10 +106,10 @@ public class TabFragment extends Fragment implements RecyclerViewAdapter.ItemLis
 
     @Override
     public void onItemLongClick(int position) {
-        enableActionMode(position);
+        enableMultiSelectMode(position);
     }
 
-    private void enableActionMode(int position) {
+    private void enableMultiSelectMode(int position) {
         recyclerViewAdapter.toggleSelection(position);
         MyApplication.setSelectedItemCount(recyclerViewAdapter.getSelectedItemCount());
         getActivity().invalidateOptionsMenu();
@@ -146,7 +146,7 @@ public class TabFragment extends Fragment implements RecyclerViewAdapter.ItemLis
         return json;
     }
 
-    private void returnToNormalMode() {
+    public void returnToNormalMode() {
         recyclerViewAdapter.clearSelections();
         ((MainActivity) getActivity()).getSupportActionBar().setTitle(R.string.app_name);
         getActivity().invalidateOptionsMenu();
