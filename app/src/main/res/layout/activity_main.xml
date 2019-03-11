@@ -22,7 +22,6 @@
             android:layout_height="?attr/actionBarSize"
             android:layout_weight="1"
             android:background="?attr/colorPrimary"
-            app:layout_scrollFlags="scroll|enterAlways"
             app:popupTheme="@style/AppTheme.PopupOverlay"
             app:title="@string/app_name">
 
@@ -30,49 +29,56 @@
 
     </com.google.android.material.appbar.AppBarLayout>
 
-    <LinearLayout
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/cl_tab_parent"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_marginTop="80dp"
-        android:orientation="vertical">
+        android:layout_height="match_parent">
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight=".2"
-            android:orientation="vertical">
 
-            <com.google.android.material.tabs.TabLayout
-                android:id="@+id/tabs"
-                style="@style/TabStyle"
-                android:layout_width="match_parent"
+        <com.google.android.material.tabs.TabLayout
+            android:id="@+id/tabs"
+            style="@style/TabStyle"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="80dp"
+            android:layout_marginBottom="1dp"
+            android:background="@color/colorScreenBg"
+            app:layout_constraintBottom_toTopOf="@+id/rl_child_tab_desc"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:tabGravity="fill"
+            app:tabIndicatorColor="@color/colorTabIndicator"
+            app:tabMode="fixed" />
+
+        <RelativeLayout
+            android:id="@+id/rl_child_tab_desc"
+            android:layout_width="0dp"
+            android:layout_height="60dp"
+            android:layout_marginBottom="2dp"
+            android:background="@color/colorScreenBg"
+            app:layout_constraintBottom_toTopOf="@+id/frameLayout"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tabs">
+
+            <TextView
+                android:id="@+id/tab_textview"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:background="@color/colorScreenBg"
-                app:tabGravity="fill"
-                app:tabIndicatorColor="@color/colorTabIndicator"
-                app:tabMode="fixed" />
+                android:layout_centerVertical="true"
+                android:layout_marginStart="16dp" />
+        </RelativeLayout>
 
-            <RelativeLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_marginTop="1dp"
-                android:background="@color/colorScreenBg">
-
-                <TextView
-                    android:id="@+id/tab_textview"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_centerVertical="true"
-                    android:layout_marginStart="16dp" />
-            </RelativeLayout>
-        </LinearLayout>
 
         <FrameLayout
-            android:layout_width="match_parent"
+            android:id="@+id/frameLayout"
+            android:layout_width="wrap_content"
             android:layout_height="0dp"
-            android:layout_marginTop="1.5dp"
-            android:layout_weight=".8"
-            android:background="@color/colorScreenBg">
+            android:background="@color/colorScreenBg"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="@+id/rl_child_tab_desc"
+            app:layout_constraintTop_toBottomOf="@+id/rl_child_tab_desc">
 
             <androidx.viewpager.widget.ViewPager
                 android:id="@+id/viewpager"
@@ -80,6 +86,6 @@
                 android:layout_height="match_parent"
                 app:layout_behavior="@string/appbar_scrolling_view_behavior" />
         </FrameLayout>
-    </LinearLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/main_content"
     android:layout_width="match_parent"
@@ -8,143 +9,157 @@
     android:fitsSystemWindows="true"
     tools:context=".MainActivity">
 
-    <LinearLayout
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/cl_parent_layout"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical">
+        android:layout_height="wrap_content">
 
-        <RelativeLayout
-            android:layout_width="match_parent"
+
+        <TextView
+            android:id="@+id/tv_followers_title"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_weight=".3">
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="24dp"
+            android:layout_marginBottom="11dp"
+            android:fontFamily="sans-serif"
+            android:text="@string/tab_one"
+            android:textColor="@color/colorTaskNumbers"
+            android:textSize="13sp"
+            android:textStyle="normal"
+            app:layout_constraintBottom_toTopOf="@+id/cl_child_followers"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_chainStyle="spread_inside" />
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/cl_child_followers"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="14dp"
+            android:background="@android:color/white"
+            android:paddingStart="16dp"
+            android:paddingTop="11dp"
+            android:paddingEnd="16dp"
+            android:paddingBottom="8dp"
+            app:layout_constraintBottom_toTopOf="@+id/tv_favourites_title"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tv_followers_title">
 
             <TextView
-                android:id="@+id/tv_followers_title"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="16dp"
-                android:layout_marginTop="24dp"
-                android:fontFamily="sans-serif"
-                android:text="@string/tab_one"
-                android:textColor="@color/colorTaskNumbers"
-                android:textSize="13sp"
-                android:textStyle="normal" />
-
-            <RelativeLayout
+                android:id="@+id/tv_followers_description"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_below="@id/tv_followers_title"
-                android:layout_marginTop="11dp"
-                android:paddingTop="11dp"
-                android:paddingStart="16dp"
-                android:paddingEnd="16dp"
-                android:paddingBottom="8dp"
-                android:background="@android:color/white">
+                android:layout_marginBottom="16dp"
+                android:fontFamily="sans-serif"
+                android:letterSpacing="-0.02"
+                android:lineSpacingExtra="3sp"
+                android:text="@string/string_followers_description"
+                android:textColor="@color/colorHelpDescriptionText"
+                android:textSize="13sp"
+                android:textStyle="normal"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
 
-                <TextView
-                    android:id="@+id/tv_followers_description"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginBottom="16dp"
-                    android:fontFamily="sans-serif"
-                    android:letterSpacing="-0.02"
-                    android:lineSpacingExtra="3sp"
-                    android:text="@string/string_followers_description"
-                    android:textColor="@color/colorHelpDescriptionText"
-                    android:textSize="13sp"
-                    android:textStyle="normal" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
 
-            </RelativeLayout>
-        </RelativeLayout>
 
-        <RelativeLayout
-            android:layout_width="match_parent"
+        <TextView
+            android:id="@+id/tv_favourites_title"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_weight=".3">
+            android:layout_marginStart="16dp"
+            android:layout_marginBottom="11dp"
+            android:fontFamily="sans-serif"
+            android:text="@string/tab_two"
+            android:textColor="@color/colorTaskNumbers"
+            android:textSize="13sp"
+            android:textStyle="normal"
+            app:layout_constraintBottom_toTopOf="@+id/cl_child_favorites"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/cl_child_followers" />
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/cl_child_favorites"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="15dp"
+            android:background="@android:color/white"
+            android:paddingStart="16dp"
+            android:paddingTop="11dp"
+            android:paddingEnd="16dp"
+            android:paddingBottom="8dp"
+            app:layout_constraintBottom_toTopOf="@+id/tv_blocked_title"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tv_favourites_title">
 
             <TextView
-                android:id="@+id/tv_favourites_title"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="16dp"
-                android:layout_marginTop="24dp"
-                android:fontFamily="sans-serif"
-                android:text="@string/tab_two"
-                android:textColor="@color/colorTaskNumbers"
-                android:textSize="13sp"
-                android:textStyle="normal" />
-
-            <RelativeLayout
+                android:id="@+id/tv_favourites_description"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_below="@id/tv_favourites_title"
-                android:layout_marginTop="11dp"
-                android:paddingTop="11dp"
-                android:paddingStart="16dp"
-                android:paddingEnd="16dp"
-                android:paddingBottom="8dp"
-                android:background="@android:color/white">
+                android:layout_marginBottom="16dp"
+                android:fontFamily="sans-serif"
+                android:letterSpacing="-0.02"
+                android:lineSpacingExtra="3sp"
+                android:text="@string/string_favourites_description"
+                android:textColor="@color/colorHelpDescriptionText"
+                android:textSize="13sp"
+                android:textStyle="normal"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
 
-                <TextView
-                    android:id="@+id/tv_favourites_description"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginBottom="16dp"
-                    android:fontFamily="sans-serif"
-                    android:letterSpacing="-0.02"
-                    android:lineSpacingExtra="3sp"
-                    android:text="@string/string_favourites_description"
-                    android:textColor="@color/colorHelpDescriptionText"
-                    android:textSize="13sp"
-                    android:textStyle="normal" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
 
-            </RelativeLayout>
-        </RelativeLayout>
 
-        <RelativeLayout
-            android:layout_width="match_parent"
+        <TextView
+            android:id="@+id/tv_blocked_title"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_weight=".3">
+            android:layout_marginStart="16dp"
+            android:layout_marginBottom="11dp"
+            android:fontFamily="sans-serif"
+            android:text="@string/tab_three"
+            android:textColor="@color/colorTaskNumbers"
+            android:textSize="13sp"
+            android:textStyle="normal"
+            app:layout_constraintBottom_toTopOf="@+id/cl_child_blocked"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/cl_child_favorites" />
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/cl_child_blocked"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@android:color/white"
+            android:paddingStart="16dp"
+            android:paddingTop="11dp"
+            android:paddingEnd="16dp"
+            android:paddingBottom="8dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tv_blocked_title">
 
             <TextView
-                android:id="@+id/tv_blocked_title"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="16dp"
-                android:layout_marginTop="24dp"
-                android:fontFamily="sans-serif"
-                android:text="@string/tab_three"
-                android:textColor="@color/colorTaskNumbers"
-                android:textSize="13sp"
-                android:textStyle="normal" />
-
-            <RelativeLayout
+                android:id="@+id/tv_blocked_description"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_below="@id/tv_blocked_title"
-                android:layout_marginTop="11dp"
-                android:paddingTop="11dp"
-                android:paddingStart="16dp"
-                android:paddingEnd="16dp"
-                android:paddingBottom="8dp"
-                android:background="@android:color/white">
+                android:layout_marginBottom="16dp"
+                android:fontFamily="sans-serif"
+                android:letterSpacing="-0.02"
+                android:lineSpacingExtra="3sp"
+                android:text="@string/string_favourites_description"
+                android:textColor="@color/colorHelpDescriptionText"
+                android:textSize="13sp"
+                android:textStyle="normal"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
 
-                <TextView
-                    android:id="@+id/tv_blocked_description"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginBottom="16dp"
-                    android:fontFamily="sans-serif"
-                    android:letterSpacing="-0.02"
-                    android:lineSpacingExtra="3sp"
-                    android:text="@string/string_favourites_description"
-                    android:textColor="@color/colorHelpDescriptionText"
-                    android:textSize="13sp"
-                    android:textStyle="normal" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
 
-            </RelativeLayout>
-        </RelativeLayout>
-    </LinearLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>
